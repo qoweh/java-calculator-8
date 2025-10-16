@@ -4,22 +4,20 @@
 
 # Table
 1. [기능 목록](#1-기능-목록)
-2. 임시2
-3. [기록](#3-기록)
+2. [기록](#2-기록)
 
 
 ---
 
 ## 1. 기능 목록
-<br><br>
-
+- 전체 로직 : 사용자는 문자열을 입력하고, 결과로서 구분자를 기준으로 분리된 숫자들의 합을 출력한다.
+  - 부분 로직
+    1. 초기 문자열("덧셈할 문자열을 입력해 주세요.\n")을 출력한다.
+    2. 사용자에게 문자열을 입력받는다. [명시되지 않은 경우: 소수, 음수, 엄청 크거나 작은 수]
+    3. 예외처리를 포함하여 문자열을 전처리한다.
+    4. 결과를 특정 형태("결과 : 6\n")로 출력한다.
 
 ---
-## 3. 기록
-- [1일차](https://www.notion.so/1-28cb5f46b3c2806abfa1d0fa77d49081?source=copy_link)
-    >   참고 문서
-    > 1. [Markdown에 링크 목차 만드는 법](https://kyeoneee.tistory.com/56)
-    > 2. [Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153)
-    > 3. [Commit Message Conventions - latest](https://github.com/angular/angular/blob/main/contributing-docs/commit-message-guidelines.md#commit-message-format)
----
-- 2일차
+
+## 2. 기록
+> [1주차 기록 - notion](https://www.notion.so/1-28cb5f46b3c2800e8de6e2e18c0cfa1f?source=copy_link)
