@@ -1,31 +1,61 @@
 package calculator;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Test;
-
-import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class ApplicationTest extends NsTest {
-    @Test
-    void 커스텀_구분자_사용() {
-        assertSimpleTest(() -> {
-            run("//;\\n1");
-            assertThat(output()).contains("결과 : 1");
-        });
+
+class ApplicationTest {
+    Calculator calculator = new Calculator();
+
+    @ParameterizedTest
+    @CsvSource({
+            "'', 0",
+            "',,,,::::', 0",
+            "'1,', 1",
+            "',1', 1",
+            "',1,', 1",
+            "'1', 1",
+            "'1,2:3', 6",
+            "'1,2,3,4,5', 15",
+            "'1,2,:::,,,3,,,,,4,5', 15",
+            "'//%\\n:1,2:3%4', 10",
+            "'//%\\n1,2:3%4', 10",
+            "'9223372036854775807,0', 9223372036854775807",
+    })
+    void testSuccessData(String input, Long expected) {
+        assertThat(calculator.work(input)).isEqualTo(expected);
     }
 
-    @Test
-    void 예외_테스트() {
-        assertSimpleTest(() ->
-            assertThatThrownBy(() -> runException("-1,2,3"))
-                .isInstanceOf(IllegalArgumentException.class)
-        );
+    @ParameterizedTest
+    @MethodSource("fileTestData")
+    void testLargeInput(String input, Long expected) {
+        assertThat(calculator.work(input)).isEqualTo(expected);
     }
 
-    @Override
-    public void runMain() {
-        Application.main(new String[]{});
+    private static Stream<Arguments> fileTestData() throws IOException {
+        String input = Files.readString(Paths.get("src/test/resources/large_test_case.txt"));
+        return Stream.of(Arguments.of(input, 50005000L));
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "'//%\\n1,2:3%4$'",
+            "'/%\\n1,2:3%4$'",
+            "'//\\n1,2:3%4$'",
+            "'//%n1,2:3%4$'",
+            "'//%\\1,2:3%4$'",
+    })
+    void testIllegalArgumentException(String input) {
+        assertThatThrownBy(() -> calculator.work(input))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
