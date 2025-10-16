@@ -12,13 +12,16 @@ public class PreProcessorUtil {
         if (input.charAt(0) != '/') {
             return false;
         }
-        if (input.charAt(1) == '/' && input.charAt(3) == '\\' && input.charAt(4) == 'n') {
+        if (input.charAt(1) == '/'
+                && input.charAt(3) == '\\'
+                && input.charAt(4) == 'n') {
             return true;
         }
         throw new IllegalArgumentException("올바르지 않은 입력 형식입니다.");
     }
 
     public String[] getSlicedStrings(String input, String delimiters) {
-        return input.split("[" + delimiters + "]");
+        String regexDelimiters = "[" + delimiters + "]";
+        return input.split(regexDelimiters);
     }
 }
