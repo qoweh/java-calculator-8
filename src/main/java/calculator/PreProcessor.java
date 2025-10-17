@@ -10,7 +10,7 @@ public class PreProcessor {
     }
 
     public String[] work(String input) {
-        if (preProcessorUtil.haveCustomDelimiter(input)) {
+        while (preProcessorUtil.haveCustomDelimiter(input)) {
             delimiters = preProcessorUtil
                     .getCustomDelimiter(input, delimiters);
             input = input.substring(5);
