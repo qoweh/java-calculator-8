@@ -1,20 +1,18 @@
 package calculator;
 
 public class PreProcessor {
-    private String delimiters;
-    private PreProcessorUtil preProcessorUtil;
+    private final static String DELIMITERS = ",:";
+    private final PreProcessorUtil preProcessorUtil = new PreProcessorUtil(DELIMITERS);
 
-    public PreProcessor() {
-        this.delimiters = ",:";
-        this.preProcessorUtil = new PreProcessorUtil();
-    }
+    public PreProcessor() {}
 
     public String[] work(String input) {
-        while (preProcessorUtil.haveCustomDelimiter(input)) {
-            delimiters = preProcessorUtil
-                    .getCustomDelimiter(input, delimiters);
-            input = input.substring(5);
+        StringBuilder inputStringBuilder = new StringBuilder(input);
+
+        while (preProcessorUtil.haveCustomDelimiter(inputStringBuilder)) {
+            preProcessorUtil.appendCustomDelimiter(inputStringBuilder);
+            preProcessorUtil.makeSubstringToEndIndex(inputStringBuilder, 5);
         }
-        return preProcessorUtil.getSlicedStrings(input, delimiters);
+        return preProcessorUtil.getSlicedStrings(inputStringBuilder);
     }
 }

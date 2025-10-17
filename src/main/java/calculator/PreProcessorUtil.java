@@ -1,14 +1,15 @@
 package calculator;
 
 public class PreProcessorUtil {
-    public PreProcessorUtil() {}
+    private final StringBuilder delimiterStringBuilder;
 
-    public String getCustomDelimiter(String input, String delimiters) {
-        delimiters += input.charAt(2);
-        return delimiters;
+    public PreProcessorUtil(final String DELIMITERS) {
+        this.delimiterStringBuilder = new StringBuilder(DELIMITERS);
     }
 
-    public boolean haveCustomDelimiter(String input) {
+    public boolean haveCustomDelimiter(StringBuilder inputStringBuilder) {
+        String input = inputStringBuilder.toString();
+
         if (input.charAt(0) != '/') {
             return false;
         }
@@ -20,8 +21,20 @@ public class PreProcessorUtil {
         throw new IllegalArgumentException("올바르지 않은 입력 형식입니다.");
     }
 
-    public String[] getSlicedStrings(String input, String delimiters) {
-        String regexDelimiters = "[" + delimiters + "]";
-        return input.split(regexDelimiters);
+    public void appendCustomDelimiter(StringBuilder inputStringBuilder) {
+        String input = inputStringBuilder.toString();
+        delimiterStringBuilder.append(input.charAt(2));
+    }
+
+    public String[] getSlicedStrings(StringBuilder inputStringBuilder) {
+        delimiterStringBuilder.insert(0, "[");
+        delimiterStringBuilder.append("]");
+
+        String input = inputStringBuilder.toString();
+        return input.split(delimiterStringBuilder.toString());
+    }
+
+    public void makeSubstringToEndIndex(StringBuilder inputStringBuilder, int endIndex) {
+        inputStringBuilder.delete(0, endIndex);
     }
 }

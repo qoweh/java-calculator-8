@@ -44,7 +44,8 @@ class ApplicationTest {
     }
 
     private static Stream<Arguments> fileTestData() throws IOException {
-        String input = Files.readString(Paths.get("src/test/resources/large_test_case.txt"));
+        String input =
+                Files.readString(Paths.get("src/test/resources/large_test_case.txt"));
         return Stream.of(Arguments.of(input, 50005000L));
     }
 
