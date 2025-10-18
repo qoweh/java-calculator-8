@@ -37,4 +37,13 @@ public class PreProcessorUtil {
     public void makeSubstringToEndIndex(StringBuilder inputStringBuilder, int endIndex) {
         inputStringBuilder.delete(0, endIndex);
     }
+
+    public boolean haveNonDigit(String refined) {
+        for (int i = 0; i < refined.length(); i++) {
+            if (!Character.isDigit(refined.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -10,16 +10,15 @@ public class Calculator {
     }
 
     public long work(String input) {
-        if (input.isEmpty()) return 0L;
+        if (input.isEmpty()) {
+            return 0L;
+        }
 
         String[] refinedInput = preProcessor.work(input);
+
         for (String each : refinedInput) {
-            try {
-                if (!each.isBlank()) {
-                    result += Long.parseLong(each);
-                }
-            } catch (Exception e) {
-                throw new IllegalArgumentException("올바르지 않은 입력 형식입니다.");
+            if (preProcessor.refinedStringIsDigit(each)) {
+                result += Long.parseLong(each);
             }
         }
         return result;
