@@ -21,7 +21,7 @@ public class PreProcessor {
         if (refined.isBlank()) {
             return false;
         } else if (preProcessorUtil.haveNonDigit(refined)) {
-            throw new IllegalArgumentException("올바르지 않은 입력 형식입니다.");
+            throw new IllegalArgumentException("올바르지 않은 입력 형식입니다. 입력값 : " + refined);
         }
         return true;
     }

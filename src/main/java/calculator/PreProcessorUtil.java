@@ -18,7 +18,7 @@ public class PreProcessorUtil {
                 && input.charAt(4) == 'n') {
             return true;
         }
-        throw new IllegalArgumentException("올바르지 않은 입력 형식입니다.");
+        throw new IllegalArgumentException("올바르지 않은 입력 형식입니다. 입력값 : " + input);
     }
 
     public void appendCustomDelimiter(StringBuilder inputStringBuilder) {
