@@ -38,7 +38,7 @@ class InputStringTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"//1\\n12+1", "12", "1,2:4", ",,,1,2:4"})
+    @ValueSource(strings = {"//1\\n12,1", "12", "1,2:4", ",,,1,2:4", "123,12,121", "//!\\n//@\\n!1@@2,3:4,,"})
     void 올바른_문자열_입력(String input) {
         assertSimpleTest(() ->
                 // when
@@ -50,13 +50,13 @@ class InputStringTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1,2,3,4,,", "1,,:2::3,4,,", "//!\\n!1!2,3:4,,"})
+    @ValueSource(strings = {"1,2,3,4,,", "1,,:2::3,4,,", "//!\\n!1!2,3:4,,", "//!\\n//@\\n!1@@2,3:4,,"})
     void 적절하게_파싱_하는지(String input) {
         // when
         InputString inputString = InputString.from(input);
 
         // then
-        Assertions.assertThat(inputString.getSlicedInput()).contains("1", "2", "3", "4");
+        Assertions.assertThat(inputString.getSlicedInput()).containsExactly("1", "2", "3", "4");
     }
 
 }
