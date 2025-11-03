@@ -1,25 +1,67 @@
 # java-calculator-precourse
 
----
-
 # Table
-1. [기능 목록](#1-기능-목록)
-2. 임시2
+
+1. [기능 요구 사항](#1-기능-요구-사항)
+    - [문자열 덧셈 계산기](#1-문자열-덧셈-계산기)
+    - [입력](#2-입력)
+    - [출력](#3-출력)
+    - [중간 과정](#4-중간-과정)
+2. [설계](#2-설계)
 3. [기록](#3-기록)
 
+---
+
+## 1. 기능 요구 사항
+
+### 1. 문자열 덧셈 계산기
+
+- 입력한 문자열에서 숫자를 추출한 후 더하여 결과를 출력한다.
+- 기본 구분자는 쉼표와 콜롬이다.
+- 커스텀 구분자는 문자열 앞부분의 특정 형식(//와 \n사이에 위치하는 문자)으로 올 수 있다.
+- 잘못된 값을 입력한 경우 IllegalArgumentException을 발생시킨 후 애플리케이션은 종료된다.
+
+### 2. 입력
+
+> - 구분자와 양수로 구성된 문자열
+    >
+
+- 구분자는 기본 구분자와 커스텀 구분자로 나뉜다.
+
+> ### 가정 : 문자열의 앞과 뒤 혹은 각 문자 사이의 의도치 않은 WHITE SPACE가 존재한다면 잘못된 입력값으로 간주한다.
+
+### 3. 출력
+
+> - "결과 : n"의 형태로 출력한다.
+
+### 4. 중간 과정
+
+1. 문자열을 입력받는다.
+    1. 커스텀 지정자가 있는지, 유효한지 확인한다.
+    2. 문자열이 유효한지 확인한다.
+    3. 커스텀 지정자를 파싱한다.
+    4. 기본 지정자에 추가한다.
+2. 구분자들로 문자열을 파싱한다.
+3. 파싱된 문자열들에 대해 정수로 변환한다.
+4. 변환된 정수값들을 계산한다.
+5. 계산한 결과합을 출력한다.
+
+> #### 입력값에 대한 예외 처리
+> - 입력받는 수 : 음수, int max값,
 
 ---
 
-## 1. 기능 목록
-<br><br>
+## 2. 설계
 
+- View : InputView, OutputView
+- Controller : CalculatorController
+- Domain : Delimiter, Numbers,
+- Factory :
+- Validator :
+- Parser :
 
 ---
+
 ## 3. 기록
-- [1일차](https://www.notion.so/1-28cb5f46b3c2806abfa1d0fa77d49081?source=copy_link)
-    >   참고 문서
-    > 1. [Markdown에 링크 목차 만드는 법](https://kyeoneee.tistory.com/56)
-    > 2. [Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153)
-    > 3. [Commit Message Conventions - latest](https://github.com/angular/angular/blob/main/contributing-docs/commit-message-guidelines.md#commit-message-format)
----
-- 2일차
+
+> [1주차 기록 - notion](https://www.notion.so/1-28cb5f46b3c2800e8de6e2e18c0cfa1f?source=copy_link)
