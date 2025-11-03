@@ -15,6 +15,7 @@ public class CalculatorController {
         Numbers numbers = makeNumbers(inputString);
 
         int result = makeResult(numbers);
+        OutputView.result(result);
     }
 
     private InputString makeValidInputString(String input) {
