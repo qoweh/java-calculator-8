@@ -55,7 +55,7 @@
 
 - View : InputView, OutputView
 - Controller : CalculatorController
-- Domain : InputString, Delimiter, Numbers
+- Domain : InputString, Numbers
 
 ---
 
