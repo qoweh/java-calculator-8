@@ -11,33 +11,11 @@ public class CalculatorController {
         InputView.notifyStart();
 
         String input = Console.readLine();
-        InputString inputString = makeValidInputString(input);
-        Numbers numbers = makeNumbers(inputString);
+        InputString inputString = InputString.from(input);
+        Numbers numbers = Numbers.from(inputString.getSlicedInput());
         int result = makeResult(numbers);
 
         OutputView.result(result);
-    }
-
-    private InputString makeValidInputString(String input) {
-        InputString inputString = null;
-        try {
-            inputString = InputString.from(input);
-        } catch (IllegalArgumentException e) {
-            OutputView.error(e);
-            throw new IllegalArgumentException(e.getMessage());
-        }
-        return inputString;
-    }
-
-    private Numbers makeNumbers(InputString inputString) {
-        Numbers numbers = null;
-        try {
-            numbers = Numbers.from(inputString.getSlicedInput());
-        } catch (IllegalArgumentException e) {
-            OutputView.error(e);
-            throw new IllegalArgumentException(e.getMessage());
-        }
-        return numbers;
     }
 
     private int makeResult(Numbers numbers) {
