@@ -55,10 +55,7 @@
 
 - View : InputView, OutputView
 - Controller : CalculatorController
-- Domain : InputString, Delimiter, Numbers,
-- Factory :
-- Validator :
-- Parser :
+- Domain : InputString, Delimiter, Numbers
 
 ---
 
