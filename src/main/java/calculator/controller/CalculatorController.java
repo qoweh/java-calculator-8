@@ -13,8 +13,8 @@ public class CalculatorController {
         String input = Console.readLine();
         InputString inputString = makeValidInputString(input);
         Numbers numbers = makeNumbers(inputString);
-
         int result = makeResult(numbers);
+
         OutputView.result(result);
     }
 
@@ -24,6 +24,7 @@ public class CalculatorController {
             inputString = InputString.from(input);
         } catch (IllegalArgumentException e) {
             OutputView.error(e);
+            throw new IllegalArgumentException(e.getMessage());
         }
         return inputString;
     }
@@ -34,6 +35,7 @@ public class CalculatorController {
             numbers = Numbers.from(inputString.getSlicedInput());
         } catch (IllegalArgumentException e) {
             OutputView.error(e);
+            throw new IllegalArgumentException(e.getMessage());
         }
         return numbers;
     }
