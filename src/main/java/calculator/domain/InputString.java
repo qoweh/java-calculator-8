@@ -4,6 +4,7 @@ import calculator.ErrorMessage;
 import java.util.List;
 
 public class InputString {
+    private static final int ALL = -1;
     private List<String> slicedInput;
 
     private InputString(List<String> slicedInput) {
@@ -12,12 +13,17 @@ public class InputString {
 
     public static InputString from(String input) throws IllegalArgumentException {
         validate(input);
-
-        return new InputString(List.of(null));
+//        String
+        List<String> strings = List.of(input.split("", ALL));
+        return new InputString(strings);
     }
 
     private static void validate(String input) throws IllegalArgumentException {
-
-        throw new IllegalArgumentException(ErrorMessage.EMPTY_STRING.getMessage());
+        if (input.isBlank()) {
+            throw new IllegalArgumentException(ErrorMessage.EMPTY_STRING.getMessage());
+        }
+        if (!input.matches("^(//\\.\\n)*([:,]*\\d*)+$")) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_STRING.getMessage());
+        }
     }
 }
