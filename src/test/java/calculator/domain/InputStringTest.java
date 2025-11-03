@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import calculator.ErrorMessage;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -46,6 +47,16 @@ class InputStringTest {
                         // then
                         .doesNotThrowAnyException()
         );
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3,4,,", "1,,:2::3,4,,", "//!\\n!1!2,3:4,,"})
+    void 적절하게_파싱_하는지(String input) {
+        // when
+        InputString inputString = InputString.from(input);
+
+        // then
+        Assertions.assertThat(inputString.getSlicedInput()).contains("1", "2", "3", "4");
     }
 
 }
